@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.per-info {
+    .entry {
+        //width: 540px;
+    }
+}
+
+.numbers {
+
+    .number {
+        margin-right: 3px;
+
+        &.event-info {
+
+        }
+
+        &.per_number {
+            color: red;
+        }
+
+        &.bonus_number {
+            color: blue;
+        }
+    }
+}
+
+.form-control {
+    min-width: 350px;
+
+    .input-group {
+        .input-label {
+            width: 130px;
+
+            &.carry_over {
+                width: 200px;
+            }
+        }
+
+        .datefield {
+            border-top-left-radius: 0;
+            border-top-right-radius: var(--rounded-btn, 0.5rem);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: var(--rounded-btn, 0.5rem);
+        }
+
+        .per-number, .win-unit {
+            width: 100px;
+
+            &.rounded-r {
+                border-top-left-radius: 0;
+                border-top-right-radius: var(--rounded-btn, 0.5rem);
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: var(--rounded-btn, 0.5rem);
+            }
+        }
+
+        .error-msg {
+            background-color: transparent;
+            color: red;
+        }
+    }
+}
