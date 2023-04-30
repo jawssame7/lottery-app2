@@ -4,8 +4,8 @@ import TdItem from './TdItem';
 const List = ({ minilotoList }: { minilotoList: MiniLotoTypes[] }) => {
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
+      <div className={'overflow-x-auto'}>
+        <table className={'table w-full'}>
           <thead>
             <tr>
               <th>開催回</th>

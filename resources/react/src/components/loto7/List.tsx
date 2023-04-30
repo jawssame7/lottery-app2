@@ -3,8 +3,8 @@ import { Loto7Types } from '../../types/Loto7Types';
 
 export const List = ({ loto7List }: { loto7List: Loto7Types[] }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="table w-full">
+    <div className={'overflow-x-auto'}>
+      <table className={'table w-full'}>
         <thead>
           <tr>
             <th>開催回</th>

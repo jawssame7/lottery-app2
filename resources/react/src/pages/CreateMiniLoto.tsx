@@ -1,9 +1,9 @@
 import Form from '../components/common/Form';
 
-const CreateMiniLoto = () => {
+const CreateMiniLoto = (res) => {
   return (
     <>
-      <Form type={'miniLoto'} />
+      <Form type={'miniLoto'} times={res.times} />
     </>
   );
 };

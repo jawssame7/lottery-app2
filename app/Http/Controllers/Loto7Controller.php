@@ -6,6 +6,7 @@ use App\Models\Loto7Result;
 use DateTime;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class Loto7Controller extends Controller
 {
@@ -21,7 +22,8 @@ class Loto7Controller extends Controller
         $loto7Results = $sqlQuery->get();
 //        return response()->json($loto7Results);
         return Inertia::render('Loto7', [
-            'loto7Results' => $loto7Results
+            'loto7Results' => $loto7Results,
+            'authorizedId' => Auth::id()
         ]);
     }
 

@@ -27,6 +27,7 @@
         "daisyui": "^2.51.5",
         "date-fns": "^2.29.3",
         "react-datepicker": "^4.11.0",
-        "react-tailwindcss-datepicker": "^1.6.0"
+        "react-tailwindcss-datepicker": "^1.6.0",
+        "tw-elements": "^1.0.0-beta2"
     }
 }

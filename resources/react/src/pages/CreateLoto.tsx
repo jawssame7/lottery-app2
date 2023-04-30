@@ -1,9 +1,10 @@
 import Form from '../components/common/Form';
 
-const CreateLoto = () => {
+const CreateLoto = (res) => {
+  console.log(res);
   return (
     <>
-      <Form type={'loto6'} />
+      <Form type={'loto6'} times={res.times} />
     </>
   );
 };

@@ -3,8 +3,8 @@ import TdItem from './TdItem';
 
 export const List = ({ loto6List }: { loto6List: Loto6Types[] }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="table w-full">
+    <div className={'overflow-x-auto'}>
+      <table className={'table w-full'}>
         <thead>
           <tr>
             <th>開催回</th>

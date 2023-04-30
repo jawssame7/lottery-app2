@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Loto6Result;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class Loto6Controller extends Controller
 {
@@ -21,18 +22,40 @@ class Loto6Controller extends Controller
         $loto6Results = $sqlQuery->get();
 //        return response()->json($loto6Results);
         return Inertia::render('Loto6', [
-            'loto6Results' => $loto6Results
+            'loto6Results' => $loto6Results,
+            'authorizedId' => Auth::id()
+        ]);
+    }
+
+    /**
+     * 作成画面へ
+     * @param Request $request
+     * @return \Inertia\Response
+     * @throws \Exception
+     */
+    public function create(Request $request)
+    {
+        $sqlQuery = Loto6Result::query();
+        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->limit(1);
+        $loto6Results = $sqlQuery->get();
+        $loto6Result = $loto6Results->first();
+
+//        dd($loto6Result['times'] + 1);
+        return Inertia::render('CreateLoto', [
+            'times' => $loto6Result['times'] + 1
         ]);
     }
 
     /**
      * 新規追加
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Inertia\Response|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
     public function store(Request $request)
     {
+//        dd($request->get("event_date"));
 
         $attributes = $request->validate([
             'times' => 'required | integer',

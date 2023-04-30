@@ -6,6 +6,7 @@ use App\Models\MinilotoResult;
 use DateTime;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class MinilotoController extends Controller
 {
@@ -18,7 +19,8 @@ class MinilotoController extends Controller
         $minilotoResults = $sqlQuery->get();
 //        return response()->json($minilotoResults);
         return Inertia::render('MiniLoto', [
-            'minilotoResults' => $minilotoResults
+            'minilotoResults' => $minilotoResults,
+            'authorizedId' => Auth::id()
         ]);
     }
 
