@@ -38,20 +38,22 @@ Route::get('loto6', [Loto6Controller::class, 'index']);
 Route::get('/create-loto6', [Loto6Controller::class, 'create']);
 
 Route::get('loto7', [Loto7Controller::class, 'index']);
+Route::get('/create-loto7', [Loto7Controller::class, 'create']);
 
 Route::get('miniloto', [MinilotoController::class, 'index']);
+Route::get('/create-miniLoto', [MinilotoController::class, 'create']);
 
 //Route::get('/create-loto6', function () {
 //    return Inertia::render('CreateLoto');
 //});
 
-Route::get('/create-loto7', function () {
-    return Inertia::render('CreateLoto7');
-});
-
-Route::get('/create-miniLoto', function () {
-    return Inertia::render('CreateMiniLoto');
-});
+//Route::get('/create-loto7', function () {
+//    return Inertia::render('CreateLoto7');
+//});
+//
+//Route::get('/create-miniLoto', function () {
+//    return Inertia::render('CreateMiniLoto');
+//});
 
 Route::get('/admin-login', function () {
     return Inertia::render('AdminLogin');

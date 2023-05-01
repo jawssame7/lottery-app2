@@ -25,6 +25,26 @@ class MinilotoController extends Controller
     }
 
     /**
+     * 作成画面へ
+     * @param Request $request
+     * @return \Inertia\Response
+     * @throws \Exception
+     */
+    public function create(Request $request)
+    {
+        $sqlQuery = MinilotoResult::query();
+        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->limit(1);
+        $miniResults = $sqlQuery->get();
+        $miniResult = $miniResults->first();
+
+//        dd($miniResults['times'] + 1);
+        return Inertia::render('CreateLoto', [
+            'times' => $miniResult['times'] + 1
+        ]);
+    }
+
+    /**
      * 新規追加
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

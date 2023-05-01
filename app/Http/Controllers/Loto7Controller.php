@@ -28,6 +28,26 @@ class Loto7Controller extends Controller
     }
 
     /**
+     * 作成画面へ
+     * @param Request $request
+     * @return \Inertia\Response
+     * @throws \Exception
+     */
+    public function create(Request $request)
+    {
+        $sqlQuery = Loto7Result::query();
+        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->limit(1);
+        $loto7Results = $sqlQuery->get();
+        $loto7Result = $loto7Results->first();
+
+//        dd($loto7Result['times'] + 1);
+        return Inertia::render('CreateLoto', [
+            'times' => $loto7Result['times'] + 1
+        ]);
+    }
+
+    /**
      * 新規追加
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
