@@ -11,7 +11,7 @@ const SPItem = ({ miniLoto }: { miniLoto: MiniLotoTypes }) => {
 
   return (
     <div className={'flex flex-row justify-stretch sp-item'}>
-      <div className={'mr-0.5 w-14 text-justify'}>{miniLoto.id}回</div>
+      <div className={'mr-0.5 w-14 text-justify'}>{miniLoto.times}回</div>
       <div className={'mr-0.5 w-24 text-justify'}>
         {format(new Date(miniLoto.event_date), 'yyyy/MM/dd')}
       </div>

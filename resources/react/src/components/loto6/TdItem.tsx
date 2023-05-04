@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 const TdItem = ({ loto6 }: { loto6: Loto6Types }) => {
   return (
     <>
-      <td>{loto6.id}</td>
+      <td>{loto6.times}</td>
       <td>{format(new Date(loto6.event_date), 'yyyy/MM/dd')}</td>
       <td>
         <Numbers

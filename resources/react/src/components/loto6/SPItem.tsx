@@ -11,7 +11,7 @@ const SPItem = ({ loto6 }: { loto6: Loto6Types }) => {
 
   return (
     <div className={'flex flex-row justify-stretch sp-item'}>
-      <div className={'mr-0.5 w-14 text-justify'}>{loto6.id}回</div>
+      <div className={'mr-0.5 w-14 text-justify'}>{loto6.times}回</div>
       <div className={'mr-0.5 w-24 text-justify'}>
         {format(new Date(loto6.event_date), 'yyyy/MM/dd')}
       </div>
