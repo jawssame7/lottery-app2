@@ -132,31 +132,44 @@ const PerInfo = ({ lotoList, maxNum = 37 }: { lotoList: Loto7Types[]; maxNum: nu
     prev5PerNumber7List
   );
 
-  // 過去10回あたりのない数字 表示用
-  const prev10NotHitInBonusMap = prev10NotHitInBonusList.map((num) => (
-    <span style={{ paddingRight: '5px' }} key={num}>
-      {num}
-    </span>
-  ));
-  // 過去5回あたりのない数字 表示用
-  const prev5NotHitInBonusMap = prev5NotHitInBonusList.map((num) => (
-    <span style={{ paddingRight: '5px' }} key={num}>
-      {num}
-    </span>
-  ));
+  console.log(prev10NotHitInBonusList);
+  console.log(prev5NotHitInBonusList);
+  console.log(prev10NotHitList);
+  console.log(prev5NotHitList);
 
   // 過去10回あたりのない数字 表示用
-  const prev10NotHitMap = prev10NotHitList.map((num) => (
-    <span style={{ paddingRight: '5px' }} key={num}>
-      {num}
-    </span>
-  ));
+  const prev10NotHitInBonusMap = prev10NotHitInBonusList.map((num) => {
+    return (
+      <span style={{ paddingRight: '5px' }} key={num}>
+        {num}
+      </span>
+    );
+  });
   // 過去5回あたりのない数字 表示用
-  const prev5NotHitMap = prev5NotHitList.map((num) => (
-    <span style={{ paddingRight: '5px' }} key={num}>
-      {num}
-    </span>
-  ));
+  const prev5NotHitInBonusMap = prev5NotHitInBonusList.map((num) => {
+    return (
+      <span style={{ paddingRight: '5px' }} key={num}>
+        {num}
+      </span>
+    );
+  });
+
+  // 過去10回あたりのない数字 表示用
+  const prev10NotHitMap = prev10NotHitList.map((num) => {
+    return (
+      <span style={{ paddingRight: '5px' }} key={num}>
+        {num}
+      </span>
+    );
+  });
+  // 過去5回あたりのない数字 表示用
+  const prev5NotHitMap = prev5NotHitList.map((num) => {
+    return (
+      <span style={{ paddingRight: '5px' }} key={num}>
+        {num}
+      </span>
+    );
+  });
 
   const prev10NotHitInBonusDivTitle = '過去10回でていない数字(ボーナス数字含む)：';
 
