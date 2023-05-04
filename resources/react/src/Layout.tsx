@@ -49,7 +49,7 @@ const Layout = ({ children }, { children: any }) => {
             </Link>
           </div>
         </div>
-        <div className={'flex justify-center px-4 bg-base-100'}>{children}</div>
+        <div className={'w-full px-4 bg-base-100'}>{children}</div>
       </div>
     </>
   );

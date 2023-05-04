@@ -42,7 +42,7 @@ class Loto7Controller extends Controller
         $loto7Result = $loto7Results->first();
 
 //        dd($loto7Result['times'] + 1);
-        return Inertia::render('CreateLoto', [
+        return Inertia::render('CreateLoto7', [
             'times' => $loto7Result['times'] + 1
         ]);
     }

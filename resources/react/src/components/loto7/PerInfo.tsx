@@ -158,25 +158,43 @@ const PerInfo = ({ lotoList, maxNum = 37 }: { lotoList: Loto7Types[]; maxNum: nu
     </span>
   ));
 
+  const prev10NotHitInBonusDivTitle = '過去10回でていない数字(ボーナス数字含む)：';
+
+  const prev5NotHitInBonusDivTitle = '過去5回でていない数字(ボーナス数字含む)：';
+
+  const prev10NotHitDivTitle = '過去10回でていない数字(ボーナス数字含まない)：';
+
+  const prev5NotHitDivTitle = '過去5回でていない数字(ボーナス数字含まない)：';
+
   return (
-    <div className={'border-base-300 border rounded-box p-3 mt-2.5 per-info'}>
-      <div className={'flex justify-between entry'}>
-        <div>過去10回でていない数字(ボーナス数字含む)：</div>
-        <div>{prev10NotHitInBonusMap}</div>
+    <>
+      <div
+        tabIndex={0}
+        className={
+          'collapse collapse-arrow w-full border-base-300 border rounded-box p-3 mt-2.5 per-info block sm:block md:block lg:block xl:block 2xl:block'
+        }
+      >
+        <div className={'collapse-title text-base font-medium'}>過去にあまり出ていない数字</div>
+        <div className={'collapse-content'}>
+          <div className={'md:flex lg:flex xl:flex 2xl:flex justify-between entry break-all '}>
+            <div className={'break-all text-xs sm:text-base'}>{prev10NotHitInBonusDivTitle}</div>
+            <div className={'break-all text-sm sm:text-base'}>{prev10NotHitInBonusMap}</div>
+          </div>
+          <div className={'md:flex lg:flex xl:flex 2xl:flex  justify-between entry'}>
+            <div className={'break-all text-xs sm:text-base'}>{prev5NotHitInBonusDivTitle}</div>
+            <div className={'break-all text-sm sm:text-base'}>{prev5NotHitInBonusMap}</div>
+          </div>
+          <div className={'md:flex lg:flex xl:flex 2xl:flex  justify-between entry'}>
+            <div className={'break-all text-xs sm:text-base'}>{prev10NotHitDivTitle}</div>
+            <div className={'break-all text-sm sm:text-base'}>{prev10NotHitMap}</div>
+          </div>
+          <div className={'md:flex lg:flex xl:flex 2xl:flex  justify-between entry'}>
+            <div className={'break-all text-xs sm:text-base'}>{prev5NotHitDivTitle}</div>
+            <div className={'break-all text-sm sm:text-base'}>{prev5NotHitMap}</div>
+          </div>
+        </div>
       </div>
-      <div className={'flex justify-between entry'}>
-        <div>過去5回でていない数字(ボーナス数字含む)：</div>
-        <div>{prev5NotHitInBonusMap}</div>
-      </div>
-      <div className={'flex justify-between entry'}>
-        <div>過去10回でていない数字(ボーナス数字含まない)：</div>
-        <div>{prev10NotHitMap}</div>
-      </div>
-      <div className={'flex justify-between entry'}>
-        <div>過去5回でていない数字(ボーナス数字含まない)：</div>
-        <div>{prev5NotHitMap}</div>
-      </div>
-    </div>
+    </>
   );
 };
 

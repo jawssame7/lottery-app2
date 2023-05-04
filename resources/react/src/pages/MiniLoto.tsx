@@ -21,7 +21,6 @@ const MiniLoto = ({ minilotoResults, authorizedId }) => {
           </div>
         </div>
         <PerInfo minilotoList={minilotoResults} maxNum={31} />
-        <h3 className={'text-base font-medium mt-2.5'}>最新が一番上</h3>
         <List minilotoList={minilotoResults}></List>
       </div>
     </>

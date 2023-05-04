@@ -21,7 +21,6 @@ const Loto7 = ({ loto7Results, authorizedId }) => {
           </div>
         </div>
         <PerInfo lotoList={loto7Results} maxNum={37} />
-        <h3 className={'text-base font-medium mt-2.5'}>最新が一番上</h3>
         <List loto7List={loto7Results}></List>
       </div>
     </>

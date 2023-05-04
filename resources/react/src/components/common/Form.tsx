@@ -1,11 +1,8 @@
 import { useForm } from '@inertiajs/inertia-react';
-// import DatePicker, { registerLocale } from 'react-datepicker';
-// import ja from 'date-fns/locale/ja';
 import Datepicker from 'react-tailwindcss-datepicker';
 
 const getCls = (id, type) => {
   let cls: string = '';
-
   switch (type) {
     case 'loto6':
       if (id === 'per_number_6') {
@@ -28,8 +25,14 @@ const getCls = (id, type) => {
     case 'loto7':
       break;
     case 'miniLoto':
+      if (id === 'per_number_5') {
+        cls = 'rounded-r';
+      }
       if (id === 'per_number_7' || id === 'per_number_6') {
         cls = 'hidden';
+      }
+      if (id === 'bonus_number_1') {
+        cls = 'rounded-r';
       }
       if (id === 'bonus_number_2') {
         cls = 'hidden';
@@ -110,8 +113,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
         <h1 className={'text-2xl font-bold'}>{title}</h1>
         <div className={'border-base-300 border rounded-box p-3 mt-2.5'}>
           <form className={'w-full max-w-lg'}>
-            <div className={'flex flex-row w-full mx-3 mb-6'}>
-              <div className={'basis-1/2'}>
+            <div className={'sm:flex flex-row w-full mx-3 mb-6'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>開催回</span>
@@ -133,7 +136,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>抽選日</span>
@@ -141,13 +144,12 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   <label className={'input-group'}>
                     <span className={'input-label'}>抽選日</span>
                     <Datepicker
-                      // showIcon
                       primaryColor={'fuchsia'}
                       asSingle={true}
                       useRange={false}
+                      containerClassName={'event_date-container relative w-full text-gray-700'}
                       inputClassName={'input input-bordered datefield'}
                       displayFormat={'YYYY/MM/DD'}
-                      // selected={data['event_date']}
                       inputId={'event_date'}
                       value={parseEventDateVal()}
                       onChange={(value) => {
@@ -161,13 +163,13 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div className={'flex flex-row w-full mx-3 mb-6'}>
+            <div className={'sm:flex flex-row w-full mx-3 mb-6'}>
               <div>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>本数字</span>
                   </label>
-                  <label className={'input-group'}>
+                  <label className={'input-group per-numbers'}>
                     <span className={'input-label'}>本数字</span>
                     <input
                       type={'text'}
@@ -205,7 +207,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                       type={'text'}
                       id={'per_number_5'}
                       placeholder={'本数字 5'}
-                      className={'input input-bordered per-number'}
+                      className={'input input-bordered per-number ' + getCls('per_number_5', type)}
                       value={data.per_number_5}
                       onChange={(e) => setData('per_number_5', trim(e.target.value))}
                     />
@@ -236,13 +238,13 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div className={'flex flex-row w-full mx-3 mb-6'}>
+            <div className={'sm:flex flex-row w-full mx-3 mb-6'}>
               <div>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>ボーナス数字</span>
                   </label>
-                  <label className={'input-group'}>
+                  <label className={'input-group bonus-numbers'}>
                     <span className={'input-label'}>ボーナス数字</span>
                     <input
                       type={'text'}
@@ -272,8 +274,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div id={'win-unit-prize-1'} className={'flex flex-row w-full mx-3 mb-6'}>
-              <div className={'basis-1/2'}>
+            <div id={'win-unit-prize-1'} className={'sm:flex flex-row w-full mx-3 mb-6'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>1等</span>
@@ -295,7 +297,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -317,8 +319,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div id={'win-unit-prize-2'} className={'flex flex-row w-full mx-3 mb-6'}>
-              <div className={'basis-1/2'}>
+            <div id={'win-unit-prize-2'} className={'sm:flex flex-row w-full mx-3 mb-6'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>2等</span>
@@ -340,7 +342,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -362,8 +364,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div id={'win-unit-prize-3'} className={'flex flex-row w-full mx-3 mb-6'}>
-              <div className={'basis-1/2'}>
+            <div id={'win-unit-prize-3'} className={'sm:flex flex-row w-full mx-3 mb-6'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>3等</span>
@@ -385,7 +387,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -407,8 +409,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div id={'win-unit-prize-4'} className={'flex flex-row w-full mx-3 mb-6'}>
-              <div className={'basis-1/2'}>
+            <div id={'win-unit-prize-4'} className={'sm:flex flex-row w-full mx-3 mb-6'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>4等</span>
@@ -430,7 +432,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -454,9 +456,9 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
             </div>
             <div
               id={'win-unit-prize-5'}
-              className={'flex flex-row w-full mx-3 mb-6 ' + getCls('win-unit-prize-5', type)}
+              className={'sm:flex flex-row w-full mx-3 mb-6 ' + getCls('win-unit-prize-5', type)}
             >
-              <div className={'basis-1/2'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>5等</span>
@@ -478,7 +480,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -502,9 +504,9 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
             </div>
             <div
               id={'win-unit-prize-6'}
-              className={'flex flex-row w-full mx-3 mb-6 ' + getCls('win-unit-prize-6', type)}
+              className={'sm:flex flex-row w-full mx-3 mb-6 ' + getCls('win-unit-prize-6', type)}
             >
-              <div className={'basis-1/2'}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>6等</span>
@@ -526,7 +528,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                   </label>
                 </div>
               </div>
-              <div className={'basis-1/2 ml-4'}>
+              <div className={'sm:basis-1/2 sm:ml-4'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>&nbsp;</span>
@@ -548,8 +550,8 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div className={'flex flex-row w-full mx-3 mb-6 ' + getCls('carry_over', type)}>
-              <div className={'basis-1/2'}>
+            <div className={'sm:flex flex-row w-full mx-3 mb-6 ' + getCls('carry_over', type)}>
+              <div className={'sm:basis-1/2'}>
                 <div className={'form-control'}>
                   <label className={'label'}>
                     <span className={'label-text'}>キャリーオーバー</span>
@@ -572,7 +574,7 @@ const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {
                 </div>
               </div>
             </div>
-            <div className={'flex flex-row w-full mx-3 mb-6 buttons'}>
+            <div className={'sm:flex flex-row w-full mx-3 mb-6 buttons'}>
               <button className={'btn btn-primary'} disabled={processing} onClick={submit}>
                 作成
               </button>

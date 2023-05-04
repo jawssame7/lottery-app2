@@ -39,7 +39,7 @@ class MinilotoController extends Controller
         $miniResult = $miniResults->first();
 
 //        dd($miniResults['times'] + 1);
-        return Inertia::render('CreateLoto', [
+        return Inertia::render('CreateMiniLoto', [
             'times' => $miniResult['times'] + 1
         ]);
     }
