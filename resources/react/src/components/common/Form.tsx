@@ -51,7 +51,7 @@ const getCls = (id, type) => {
 };
 
 const trim = (value: string) => {
-  return value.replace(/[^0-9]/g, '');
+  return Number(value.replace(/[^0-9]/g, ''));
 };
 
 const Form = ({ type = 'loto6', times }: { type: string; times: string }) => {

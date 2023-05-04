@@ -20,7 +20,7 @@ export const getNotHitList = (maxNum: number, ...perNumList: Array<number[]>) =>
   const uniqNumList = [...set];
 
   let notHitList: Array<number> = [];
-  console.log(uniqNumList);
+  // console.log(uniqNumList.sort((a, b) => a - b));
   for (let i = 0; i < maxNum; i++) {
     let num = i + 1;
     if (uniqNumList.length > 0 && !uniqNumList.includes(num)) {

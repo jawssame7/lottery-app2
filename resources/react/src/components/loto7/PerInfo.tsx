@@ -132,10 +132,10 @@ const PerInfo = ({ lotoList, maxNum = 37 }: { lotoList: Loto7Types[]; maxNum: nu
     prev5PerNumber7List
   );
 
-  console.log(prev10NotHitInBonusList);
-  console.log(prev5NotHitInBonusList);
-  console.log(prev10NotHitList);
-  console.log(prev5NotHitList);
+  // console.log(prev10NotHitInBonusList);
+  // console.log(prev5NotHitInBonusList);
+  // console.log(prev10NotHitList);
+  // console.log(prev5NotHitList);
 
   // 過去10回あたりのない数字 表示用
   const prev10NotHitInBonusMap = prev10NotHitInBonusList.map((num) => {

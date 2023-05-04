@@ -37,9 +37,6 @@ const Layout = ({ children }, { children: any }) => {
                 <li>
                   <Link href={'/loto7'}>ロト7</Link>
                 </li>
-                {/*<li>*/}
-                {/*  <Link href={'/admin-login'}>管理ログイン</Link>*/}
-                {/*</li>*/}
               </ul>
             </div>
           </div>

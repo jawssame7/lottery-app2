@@ -5,7 +5,7 @@ const EventInfoDisplayButton = () => {
   const [eventInfoDisplay, setEventInfoDisplay] = useState(false);
 
   const onClickEventInfoDisplay = () => {
-    console.log('click');
+    // console.log('click');
     let eventInfoList = document.getElementsByClassName('event-info');
     let className = 'event-info';
 
