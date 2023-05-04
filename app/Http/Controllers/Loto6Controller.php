@@ -17,7 +17,7 @@ class Loto6Controller extends Controller
     public function index()
     {
         $sqlQuery = Loto6Result::query();
-        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
         $sqlQuery->limit(30);
         $loto6Results = $sqlQuery->get();
 //        return response()->json($loto6Results);
@@ -36,7 +36,7 @@ class Loto6Controller extends Controller
     public function create(Request $request)
     {
         $sqlQuery = Loto6Result::query();
-        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
         $sqlQuery->limit(1);
         $loto6Results = $sqlQuery->get();
         $loto6Result = $loto6Results->first();

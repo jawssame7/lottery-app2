@@ -14,7 +14,7 @@ class MinilotoController extends Controller
     public function index()
     {
         $sqlQuery = MinilotoResult::query();
-        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
         $sqlQuery->limit(30);
         $minilotoResults = $sqlQuery->get();
 //        return response()->json($minilotoResults);
@@ -33,7 +33,7 @@ class MinilotoController extends Controller
     public function create(Request $request)
     {
         $sqlQuery = MinilotoResult::query();
-        $sqlQuery->orderBy('id', 'desc');
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
         $sqlQuery->limit(1);
         $miniResults = $sqlQuery->get();
         $miniResult = $miniResults->first();
