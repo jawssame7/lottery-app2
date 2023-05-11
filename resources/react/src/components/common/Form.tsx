@@ -9,16 +9,16 @@ const getCls = (id, type) => {
         cls = 'rounded-r';
       }
       if (id === 'per_number_7') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       if (id === 'bonus_number_1') {
         cls = 'rounded-r';
       }
       if (id === 'bonus_number_2') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       if (id === 'win-unit-prize-6') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
 
       break;
@@ -29,19 +29,19 @@ const getCls = (id, type) => {
         cls = 'rounded-r';
       }
       if (id === 'per_number_7' || id === 'per_number_6') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       if (id === 'bonus_number_1') {
         cls = 'rounded-r';
       }
       if (id === 'bonus_number_2') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       if (id === 'win-unit-prize-6' || id === 'win-unit-prize-5') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       if (id === 'carry_over') {
-        cls = 'hidden';
+        cls = 'hidden sm:hidden';
       }
       break;
     default:
