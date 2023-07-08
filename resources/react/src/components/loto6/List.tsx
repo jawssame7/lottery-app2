@@ -1,15 +1,33 @@
 import { Loto6Types } from '../../types/Loto6Types';
 import TdItem from './TdItem';
 import SPItem from './SPItem';
+import { useState } from 'react';
+import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 
 export const List = ({ loto6List }: { loto6List: Loto6Types[] }) => {
+  const [reverseSort, setReverseSort] = useState(-1);
+
+  const onSort = () => {
+    loto6List.reverse();
+    if (reverseSort === -1) {
+      setReverseSort(1);
+    } else {
+      setReverseSort(-1);
+    }
+  };
+
   return (
     <>
       <div className={'overflow-x-auto hidden sm:block md:block lg:block xl:block 2xl:block mt-5'}>
         <table className={'table w-full'}>
           <thead>
             <tr>
-              <th>開催回</th>
+              <th onClick={onSort}>
+                開催回
+                <span className={'times-sort'}>
+                  {reverseSort === -1 ? <AiOutlineArrowDown /> : <AiOutlineArrowUp />}
+                </span>
+              </th>
               <th>開催日</th>
               <th>当たり</th>
             </tr>

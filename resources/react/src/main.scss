@@ -8,6 +8,10 @@
   }
 }
 
+span.times-sort {
+  display: inline-block;
+}
+
 .numbers {
 
   .number {
@@ -19,10 +23,12 @@
 
     &.per_number {
       color: red;
+      font-weight: bold;
     }
 
     &.bonus_number {
       color: blue;
+      font-weight: bold;
     }
   }
 }
@@ -133,11 +139,13 @@
 .sp-item {
   .per_number {
     color: red;
+    font-weight: bold;
     text-align-last: justify;
   }
 
   .bonus_number {
     color: blue;
+    font-weight: bold;
     text-align-last: justify;
   }
 }
