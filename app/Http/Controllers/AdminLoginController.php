@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loto6Result;
+use App\Models\Loto7Result;
+use App\Models\MinilotoResult;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class AdminLoginController extends Controller
 {
@@ -40,5 +46,176 @@ class AdminLoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/loto6');
+    }
+
+    public function import(Request $request)
+    {
+
+        $csvInfo = $request->validate([
+            'category' => ['required'],
+            'csvFile' => ['required'],
+        ]);
+
+        //ファイルの保存
+        $newCsvFileName = $request->csvFile->getClientOriginalName();
+        $request->csvFile->storeAs('public/csv', $newCsvFileName);
+        //保存したCSVファイルの取得
+        $csv = Storage::disk('local')->get("public/csv/{$newCsvFileName}");
+        // OS間やファイルで違う改行コードをexplode統一
+        $csv = str_replace(array("\r\n", "\r"), "\n", $csv);
+        // $csvを元に行単位のコレクション作成。explodeで改行ごとに分解
+        $uploadedData = collect(explode("\n", $csv));
+
+        switch ($csvInfo['category']) {
+            case 'loto6':
+                $this->bulkInsertLoto6($uploadedData);
+                break;
+            case 'loto7':
+                $this->bulkInsertLoto7($uploadedData);
+                break;
+            case 'miniloto':
+                $this->bulkInsertMiniloto($uploadedData);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private function bulkInsertLoto6($uploadedData) : void
+    {
+        $items = [];
+
+        foreach ($uploadedData as $i => $data) {
+            if ($i === 0) {
+                continue;
+            }
+
+            $attributes = [];
+            $data = explode(',', $data);
+
+            $attributes['times'] = $data[0];
+            $attributes['event_date'] = $data[1];
+            $attributes['per_number_1'] = $data[2];
+            $attributes['per_number_2'] = $data[3];
+            $attributes['per_number_3'] = $data[4];
+            $attributes['per_number_4'] = $data[5];
+            $attributes['per_number_5'] = $data[6];
+            $attributes['per_number_6'] = $data[7];
+            $attributes['bonus_number_1'] = $data[8];
+            $attributes['win_units_1'] = $data[9];
+            $attributes['win_units_2'] = $data[10];
+            $attributes['win_units_3'] = $data[11];
+            $attributes['win_units_4'] = $data[12];
+            $attributes['win_units_5'] = $data[13];
+            $attributes['prize_1'] = $data[14];
+            $attributes['prize_2'] = $data[15];
+            $attributes['prize_3'] = $data[16];
+            $attributes['prize_4'] = $data[17];
+            $attributes['prize_5'] = $data[18];
+            $attributes['carry_over'] = $data[count($data) - 1];
+
+            $let = new DateTime($attributes['event_date']);
+
+
+            $attributes['event_date'] = $let->format('Y-m-d');
+
+            $items[] = $attributes;
+
+        }
+
+        Loto6Result::insert($items);
+
+    }
+
+    private function bulkInsertLoto7($uploadedData) : void
+    {
+        $items = [];
+
+        foreach ($uploadedData as $i => $data) {
+            if ($i === 0) {
+                continue;
+            }
+
+            $attributes = [];
+            $data = explode(',', $data);
+
+            $attributes['times'] = $data[0];
+            $attributes['event_date'] = $data[1];
+            $attributes['per_number_1'] = $data[2];
+            $attributes['per_number_2'] = $data[3];
+            $attributes['per_number_3'] = $data[4];
+            $attributes['per_number_4'] = $data[5];
+            $attributes['per_number_5'] = $data[6];
+            $attributes['per_number_6'] = $data[7];
+            $attributes['per_number_7'] = $data[8];
+            $attributes['bonus_number_1'] = $data[9];
+            $attributes['bonus_number_2'] = $data[10];
+            $attributes['win_units_1'] = $data[11];
+            $attributes['win_units_2'] = $data[12];
+            $attributes['win_units_3'] = $data[13];
+            $attributes['win_units_4'] = $data[14];
+            $attributes['win_units_5'] = $data[15];
+            $attributes['win_units_6'] = $data[16];
+            $attributes['prize_1'] = $data[17];
+            $attributes['prize_2'] = $data[18];
+            $attributes['prize_3'] = $data[19];
+            $attributes['prize_4'] = $data[20];
+            $attributes['prize_5'] = $data[21];
+            $attributes['prize_6'] = $data[22];
+            $attributes['carry_over'] = $data[count($data) - 1];
+
+            $let = new DateTime($attributes['event_date']);
+
+            $attributes['event_date'] = $let->format('Y-m-d');
+
+            $items[] = $attributes;
+
+        }
+
+//        dd($items);
+        Loto7Result::insert($items);
+
+    }
+
+    private function bulkInsertMiniloto($uploadedData) : void
+    {
+        $items = [];
+
+        foreach ($uploadedData as $i => $data) {
+            if ($i === 0) {
+                continue;
+            }
+
+            $attributes = [];
+            $data = explode(',', $data);
+
+            $attributes['times'] = $data[0];
+            $attributes['event_date'] = $data[1];
+            $attributes['per_number_1'] = $data[2];
+            $attributes['per_number_2'] = $data[3];
+            $attributes['per_number_3'] = $data[4];
+            $attributes['per_number_4'] = $data[5];
+            $attributes['per_number_5'] = $data[6];
+            $attributes['bonus_number_1'] = $data[7];
+            $attributes['win_units_1'] = $data[8];
+            $attributes['win_units_2'] = $data[9];
+            $attributes['win_units_3'] = $data[10];
+            $attributes['win_units_4'] = $data[11];
+            $attributes['prize_1'] = $data[12];
+            $attributes['prize_2'] = $data[13];
+            $attributes['prize_3'] = $data[14];
+            $attributes['prize_4'] = $data[15];
+
+
+            $let = new DateTime($attributes['event_date']);
+
+            $attributes['event_date'] = $let->format('Y-m-d');
+
+            $items[] = $attributes;
+
+        }
+//        dd($items);
+        MinilotoResult::insert($items);
+
     }
 }

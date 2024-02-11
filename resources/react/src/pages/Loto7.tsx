@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-react';
 
 const Loto7 = ({ loto7Results, authorizedId }) => {
   const btnCls = (authorizedId) => {
-    const btnCls = 'btn btn-primary btn-wide';
+    const btnCls = 'btn btn-primary btn-sm';
     return authorizedId ? btnCls : btnCls + ' hidden';
   };
   return (
@@ -17,6 +17,9 @@ const Loto7 = ({ loto7Results, authorizedId }) => {
           <div className={'flex flex-1 justify-end'}>
             <Link href={'/create-loto7'} className={btnCls(authorizedId)}>
               当選結果作成
+            </Link>
+            <Link href={'/import-loto7'} className={btnCls(authorizedId) + ' btn-info ml-2'}>
+              CSVインポート
             </Link>
           </div>
         </div>

@@ -59,8 +59,21 @@ Route::get('/admin-login', function () {
     return Inertia::render('AdminLogin');
 });
 
+Route::get('/import-loto6', function () {
+    return Inertia::render('ImportLoto6');
+});
+
+Route::get('/import-loto7', function () {
+    return Inertia::render('ImportLoto7');
+});
+
+Route::get('/import-miniLoto', function () {
+    return Inertia::render('ImportMiniLoto');
+});
+
 Route::post('/loto6/store', [Loto6Controller::class, 'store']);
 Route::post('/loto7/store', [Loto7Controller::class, 'store']);
 Route::post('/miniloto/store', [MinilotoController::class, 'store']);
 Route::post('/admin-login', [AdminLoginController::class, 'login']);
 Route::post('/admin-logout', [AdminLoginController::class, 'logout']);
+Route::post('/admin-import', [AdminLoginController::class, 'import']);
