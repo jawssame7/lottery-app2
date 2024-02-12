@@ -27,4 +27,9 @@ class MinilotoResult extends Model
         'prize_3',
         'prize_4'
     ];
+
+    public static function csvHeader(): array
+    {
+        return (new static)->fillable;
+    }
 }

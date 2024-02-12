@@ -1,9 +1,7 @@
 import { useForm } from '@inertiajs/inertia-react';
 import { useState } from 'react';
 
-const ImportLot7 = (res) => {
-  // console.log(res);
-
+const ImportLot7 = () => {
   const { data, setData, post, progress, errors } = useForm({
     category: 'loto7',
     csvFile: null,
@@ -33,11 +31,21 @@ const ImportLot7 = (res) => {
             accept={'text/csv'}
             onChange={onChangeFile}
           />
+          <label className={'input-group'}>
+            <span className={'error-msg'} style={{ color: 'red', backgroundColor: 'transparent' }}>
+              {errors.csvFile}
+            </span>
+          </label>
         </div>
         <div className={'mt-1'}>
           <button className={'btn btn-info'} disabled={progress} onClick={onSubmit}>
             インポート
           </button>
+          <label className={'input-group'}>
+            <span className={'error-msg'} style={{ color: 'red', backgroundColor: 'transparent' }}>
+              {errors.error}
+            </span>
+          </label>
         </div>
       </div>
     </>

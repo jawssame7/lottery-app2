@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CsvColumnMismatchException;
 use App\Models\Loto6Result;
 use App\Models\Loto7Result;
 use App\Models\MinilotoResult;
 use DateTime;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -56,39 +58,54 @@ class AdminLoginController extends Controller
             'csvFile' => ['required'],
         ]);
 
-        //ファイルの保存
-        $newCsvFileName = $request->csvFile->getClientOriginalName();
-        $request->csvFile->storeAs('public/csv', $newCsvFileName);
-        //保存したCSVファイルの取得
-        $csv = Storage::disk('local')->get("public/csv/{$newCsvFileName}");
-        // OS間やファイルで違う改行コードをexplode統一
-        $csv = str_replace(array("\r\n", "\r"), "\n", $csv);
-        // $csvを元に行単位のコレクション作成。explodeで改行ごとに分解
-        $uploadedData = collect(explode("\n", $csv));
+        try {
+            //ファイルの保存
+            $newCsvFileName = $request->csvFile->getClientOriginalName();
+            $request->csvFile->storeAs('public/csv', $newCsvFileName);
+            //保存したCSVファイルの取得
+            $csv = Storage::disk('local')->get("public/csv/{$newCsvFileName}");
+            // OS間やファイルで違う改行コードをexplode統一
+            $csv = str_replace(array("\r\n", "\r"), "\n", $csv);
+            // $csvを元に行単位のコレクション作成。explodeで改行ごとに分解
+            $uploadedData = collect(explode("\n", $csv));
 
-        switch ($csvInfo['category']) {
-            case 'loto6':
-                $this->bulkInsertLoto6($uploadedData);
-                break;
-            case 'loto7':
-                $this->bulkInsertLoto7($uploadedData);
-                break;
-            case 'miniloto':
-                $this->bulkInsertMiniloto($uploadedData);
-                break;
-            default:
-                break;
+            switch ($csvInfo['category']) {
+                case 'loto6':
+                    $this->bulkInsertLoto6($uploadedData);
+                    break;
+                case 'loto7':
+                    $this->bulkInsertLoto7($uploadedData);
+                    break;
+                case 'miniloto':
+                    $this->bulkInsertMiniloto($uploadedData);
+                    break;
+                default:
+                    break;
+            }
+            return redirect()->intended($csvInfo['category']);
+        } catch (CsvColumnMismatchException $e) {
+            return back()->withErrors(['csvFile' => 'CSVのカラムが一致しません。'])->onlyInput('csvFile');
+        } catch (Exception $e) {
+            return back()->withErrors(['error' => 'インポート中にエラーが発生しました。'])->onlyInput('error');
         }
+
     }
 
+    /**
+     * @throws CsvColumnMismatchException
+     */
     private function bulkInsertLoto6($uploadedData) : void
     {
+
+        $header = collect(Loto6Result::csvHeader());
+        $uploadedHeader = collect(explode(',', $uploadedData->shift()));
+        if ($header->count() !== $uploadedHeader->count()) {
+            throw new CsvColumnMismatchException();
+        }
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
-            if ($i === 0) {
-                continue;
-            }
 
             $attributes = [];
             $data = explode(',', $data);
@@ -129,12 +146,16 @@ class AdminLoginController extends Controller
 
     private function bulkInsertLoto7($uploadedData) : void
     {
+
+        $header = collect(Loto7Result::csvHeader());
+        $uploadedHeader = collect(explode(',', $uploadedData->shift()));
+        if ($header->count() !== $uploadedHeader->count()) {
+            throw new CsvColumnMismatchException();
+        }
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
-            if ($i === 0) {
-                continue;
-            }
 
             $attributes = [];
             $data = explode(',', $data);
@@ -179,12 +200,16 @@ class AdminLoginController extends Controller
 
     private function bulkInsertMiniloto($uploadedData) : void
     {
+
+        $header = collect(MinilotoResult::csvHeader());
+        $uploadedHeader = collect(explode(',', $uploadedData->shift()));
+        if ($header->count() !== $uploadedHeader->count()) {
+            throw new CsvColumnMismatchException();
+        }
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
-            if ($i === 0) {
-                continue;
-            }
 
             $attributes = [];
             $data = explode(',', $data);

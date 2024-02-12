@@ -14,7 +14,7 @@ const AdminLogin = () => {
     e.preventDefault();
     post('/admin-logout');
   };
-
+  console.log(errors);
   return (
     <>
       <div className={'relative flex flex-col items-center justify-center overflow-hidden'}>

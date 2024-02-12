@@ -31,4 +31,9 @@ class Loto6Result extends Model
         'prize_5',
         'carry_over'
     ];
+
+    public static function csvHeader(): array
+    {
+        return (new static)->fillable;
+    }
 }
