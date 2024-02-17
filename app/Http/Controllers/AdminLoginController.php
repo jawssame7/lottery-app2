@@ -103,12 +103,29 @@ class AdminLoginController extends Controller
             throw new CsvColumnMismatchException();
         }
 
+        // 最新を取得
+        $sqlQuery = Loto6Result::query();
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
+        $sqlQuery->limit(1);
+        $loto6Results = $sqlQuery->get();
+        $latest = $loto6Results->first();
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
 
             $attributes = [];
             $data = explode(',', $data);
+
+            // 空白を無視
+            if (empty($data[0])) {
+                continue;
+            }
+
+            // DBに入っている最新以降が対象
+            if ((int)$data[0] <= (int)$latest->times) {
+                continue;
+            }
 
             $attributes['times'] = $data[0];
             $attributes['event_date'] = $data[1];
@@ -139,7 +156,7 @@ class AdminLoginController extends Controller
             $items[] = $attributes;
 
         }
-
+//        dd($items);
         Loto6Result::insert($items);
 
     }
@@ -153,12 +170,29 @@ class AdminLoginController extends Controller
             throw new CsvColumnMismatchException();
         }
 
+        // 最新を取得
+        $sqlQuery = Loto7Result::query();
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
+        $sqlQuery->limit(1);
+        $loto7Results = $sqlQuery->get();
+        $latest = $loto7Results->first();
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
 
             $attributes = [];
             $data = explode(',', $data);
+
+            // 空白を無視
+            if (empty($data[0])) {
+                continue;
+            }
+
+            // DBに入っている最新以降が対象
+            if ((int)$data[0] <= (int)$latest->times) {
+                continue;
+            }
 
             $attributes['times'] = $data[0];
             $attributes['event_date'] = $data[1];
@@ -207,12 +241,29 @@ class AdminLoginController extends Controller
             throw new CsvColumnMismatchException();
         }
 
+        // 最新を取得
+        $sqlQuery = MinilotoResult::query();
+        $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
+        $sqlQuery->limit(1);
+        $minilotoResults = $sqlQuery->get();
+        $latest = $minilotoResults->first();
+
         $items = [];
 
         foreach ($uploadedData as $i => $data) {
 
             $attributes = [];
             $data = explode(',', $data);
+
+            // 空白を無視
+            if (empty($data[0])) {
+                continue;
+            }
+
+            // DBに入っている最新以降が対象
+            if ((int)$data[0] <= (int)$latest->times) {
+                continue;
+            }
 
             $attributes['times'] = $data[0];
             $attributes['event_date'] = $data[1];
