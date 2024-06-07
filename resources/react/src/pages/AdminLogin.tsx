@@ -31,6 +31,7 @@ const AdminLogin = () => {
                 id={'email'}
                 placeholder={'Email Address'}
                 className={'w-full input input-bordered'}
+                autoFocus={true}
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
               />
