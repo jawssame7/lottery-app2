@@ -15,7 +15,7 @@ class MinilotoController extends Controller
     {
         $sqlQuery = MinilotoResult::query();
         $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
-        $sqlQuery->limit(30);
+        $sqlQuery->limit(24);
         $minilotoResults = $sqlQuery->get();
 //        return response()->json($minilotoResults);
         return Inertia::render('MiniLoto', [

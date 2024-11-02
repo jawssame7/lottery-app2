@@ -1,3 +1,4 @@
+import React from 'react';
 import { List } from '../components/loto6/List';
 import Perinfo from '../components/loto6/PerInfo';
 import { Link } from '@inertiajs/inertia-react';

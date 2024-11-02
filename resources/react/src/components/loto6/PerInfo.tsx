@@ -1,3 +1,4 @@
+import React from 'react';
 import { Loto6Types } from '../../types/Loto6Types';
 import { getNotHitList } from '../../functions/Functions';
 

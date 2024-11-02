@@ -18,7 +18,7 @@ class Loto6Controller extends Controller
     {
         $sqlQuery = Loto6Result::query();
         $sqlQuery->orderByRaw('cast(times as DECIMAL) DESC');
-        $sqlQuery->limit(30);
+        $sqlQuery->limit(24);
         $loto6Results = $sqlQuery->get();
 //        return response()->json($loto6Results);
         return Inertia::render('Loto6', [
