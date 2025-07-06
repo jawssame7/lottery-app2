@@ -39,12 +39,9 @@ const List = ({ minilotoList }: { minilotoList: MiniLotoTypes[] }) => {
       });
     });
 
-    const filteredNumbers = Object.entries(numberCount).filter(([, count]) => count < 5); // 5回以上のものを除外
+    const filteredNumbers = Object.entries(numberCount).filter(([, count]) => count === 4); // 4回当選した数字のみ
 
-    const sortedNumbers = filteredNumbers
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 3)
-      .map(([num]) => parseInt(num));
+    const sortedNumbers = filteredNumbers.map(([num]) => parseInt(num)).sort((a, b) => a - b); // 数字順にソート
 
     setTopNumbers(sortedNumbers);
   }, [minilotoList]);

@@ -40,12 +40,9 @@ export const List = ({ loto6List }: { loto6List: Loto6Types[] }) => {
       });
     });
 
-    const filteredNumbers = Object.entries(numberCount).filter(([, count]) => count < 5); // 5回以上のものを除外
+    const filteredNumbers = Object.entries(numberCount).filter(([, count]) => count === 4); // 4回当選した数字のみ
 
-    const sortedNumbers = filteredNumbers
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 3)
-      .map(([num]) => parseInt(num));
+    const sortedNumbers = filteredNumbers.map(([num]) => parseInt(num)).sort((a, b) => a - b); // 数字順にソート
 
     setTopNumbers(sortedNumbers);
   }, [loto6List]);
@@ -56,10 +53,14 @@ export const List = ({ loto6List }: { loto6List: Loto6Types[] }) => {
         <div className={'flex flex-wrap justify-start gap-4'}>
           <div className="card bg-neutral text-neutral-content w-full sm:w-96">
             <div className="card-body items-center text-center">
-              <h2 className="card-title">上位3件の数字: {topNumbers.join(', ')}</h2>
+              <h2 className="card-title">
+                4回当選した数字:
+                <br />
+                {topNumbers.join(', ')}
+              </h2>
               <p className="text-xs sm:text-sm">
                 注意:
-                これは最新24回分のデータに基づく結果です。5回以上出現した数字は除外されています。
+                これは最新24回分のデータに基づく結果です。4回当選した数字をすべて表示しています。
               </p>
             </div>
           </div>
